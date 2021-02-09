@@ -11,15 +11,14 @@ public class EntityController : MonoBehaviour
     protected GameObject target;
     protected float speed = 5f;
 
+    public CombatController combat = new CombatController();
 
     void Start() {
         target = GameObject.FindObjectOfType<EnemyController>().gameObject;
     }
 
     void Update() {
-        //if(target) {
-            //Debug.Log(getAngleToTarget());
-        //}
+        combat.UpdateCooldownTimer(Time.deltaTime);
     }
 
     float getAngleToTarget() {
@@ -54,6 +53,12 @@ public class EntityController : MonoBehaviour
 
 
         //Debug.Log(this.name + " sees its target");
+        return true;
+    }
+
+    protected bool isTargetInRange() {
+        if(Vector3.Distance(transform.position, target.transform.position) > combat.range) return false;
+
         return true;
     }
 

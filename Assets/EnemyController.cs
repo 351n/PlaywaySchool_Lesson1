@@ -15,9 +15,15 @@ public class EnemyController : EntityController
    
     void Update()
     {
+        combat.UpdateCooldownTimer(Time.deltaTime);
         if(target) {
             if(isTargetInVision()) {
                 moveToPoint(target.transform.position);
+                if(isTargetInRange()) {
+                    if(combat.TryAttack(target)) {
+                        Debug.Log($"{this.name} attacked {target.name}");
+                    }
+                }
             } else {
                 if(moveToPoint(targetWaypoint.transform.position)) {
                     setRandomWaypoint();
