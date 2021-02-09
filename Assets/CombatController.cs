@@ -32,7 +32,7 @@ public class CombatController
     }
 
     public void GetAttacked(float dmg) {
-        health -= attack;
+        health -= dmg;
     }
 
     public bool CanAttack() {
